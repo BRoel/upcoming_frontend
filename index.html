@@ -6,7 +6,40 @@
         <script type="text/javascript" src="index.js"></script>
     </head>
     <body>
-        
+        <div class="form-container">
+
+            <form id="create-games-form">
+              <h3>Create a game!</h3>
+          
+              <input id='input-title' type="text" name="title" value="" placeholder="Enter your games title" class="input-text">
+              <br><br>
+              <textarea id='input-description' name="description" rows="8" cols="80" value="" placeholder="Enter your games description..."></textarea>
+              <br><br>
+              <input id='input-url' type="text" name="image" value="" placeholder="Enter your games image URL..." class="input-text">
+              <br><br>
+          
+              <select id="genres" name="genres">
+                <option value="1">Action</option>
+                <option value="2">Adventure</option>
+                <option value="3">Educational</option>
+                <option value="4">Fighting</option>
+                <option value="5">Platformer</option>
+                <option value="6">Puzzle</option>
+                <option value="7">RPG</option>
+                <option value="8">Racing</option>
+                <option value="9">Shooter</option>
+                <option value="10">Simulation</option>
+                <option value="11">Sports</option>
+                <option value="12">Strategy</option>
+              </select>
+              <br><br>
+          
+              <input id= 'create-button' type="submit" name="submit" value="Create New games" class="submit">
+            </form>
+        </div>
+        <div id="game-container">
+
+        </div>
     </body>
 
 </html>
