@@ -3,7 +3,7 @@ const endPoint = 'http://localhost:3000/api/v1/games';
 document.addEventListener('DOMContentLoaded', () => {// fetch and load
     getGames()
 
-    const createGameForm = document.querySelector("#create-game-form")
+    const createGameForm = document.querySelector("#create-games-form")
 
     createGameForm.addEventListener("submit", (e) => createFormHandler(e))
 })
@@ -30,15 +30,17 @@ function getGames() {
 }
 
 function createFormHandler(e) {
-    e.preventdefault()
+    e.preventDefault()
     const titleInput = document.querySelector('#input-title').value
     const descriptionInput = document.querySelector('#input-description').value
     const imageInput = document.querySelector('#input-url').value
     const genreId = parseInt(document.querySelector('#genres').value)
-    postGame(titleInput, descriptionInput, imageInput, genreId)
+    postFetch(titleInput, descriptionInput, imageInput, genreId)
 }
 
 function postFetch(title, description, image_url, genre_id) {
+    const bodyData = {title, description, image_url, genre_id}
+
     fetch(endPoint, {
     //post request
     method: "POST",
@@ -47,6 +49,17 @@ function postFetch(title, description, image_url, genre_id) {
     })
     .then(response => response.json())
     .then(game => {
-        
+        const gameData = game.data.attributes
+        // render JSON response
+        const gameMarkup = `
+        <div data-id=${game.id}>
+          <img src=${gameData.image_url} height="200" width="250">
+          <h3>${gameData.title}</h3>
+          <p>${gameData.genre.name}</p>
+          <button data-id=${gameData.id}>edit</button>
+        </div>
+        <br><br>`;
+    
+        document.querySelector('#game-container').innerHTML += gameMarkup;
     })
 }
