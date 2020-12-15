@@ -13,20 +13,23 @@ function getGames() {
     .then(response => response.json())
     .then(games => {
         games.data.forEach(game => {
-           // data is first layer to get to attributes due to serializer
-            const gameMarkup = `
-              <div data-id=${game.id}>
-                <img src=${game.attributes.image_url} height="200" width="250">
-                <h3>${game.attributes.title}</h3>
-                <p>${game.attributes.description}</p>
-                <p>${game.attributes.genre.name}</p>
-                <button data-id=${game.id}>edit</button>
-              </div>
-              <br><br>`;
-    
-              document.querySelector('#game-container').innerHTML += gameMarkup
+        renderGameForm(game)
         })
     })
+}
+
+function renderGameForm(game) {
+    const gameMarkup = `
+    <div data-id=${game.id}>
+      <img src=${game.attributes.image_url} height="200" width="250">
+      <h3>${game.attributes.title}</h3>
+      <p>${game.attributes.description}</p>
+      <p>${game.attributes.genre.name}</p>
+      <button data-id=${game.id}>edit</button>
+    </div>
+    <br><br>`;
+
+    document.querySelector('#game-container').innerHTML += gameMarkup
 }
 
 function createFormHandler(e) {
@@ -51,15 +54,6 @@ function postFetch(title, description, image_url, genre_id) {
     .then(game => {
         const gameData = game.data.attributes
         // render JSON response
-        const gameMarkup = `
-        <div data-id=${game.id}>
-          <img src=${gameData.image_url} height="200" width="250">
-          <h3>${gameData.title}</h3>
-          <p>${gameData.genre.name}</p>
-          <button data-id=${gameData.id}>edit</button>
-        </div>
-        <br><br>`;
-    
-        document.querySelector('#game-container').innerHTML += gameMarkup;
+        renderGameForm(gameData)
     })
 }
