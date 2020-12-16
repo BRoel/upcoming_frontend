@@ -13,23 +13,10 @@ function getGames() {
     .then(response => response.json())
     .then(games => {
         games.data.forEach(game => {
-        renderGameForm(game)
+        const newGame = new Game(game.id, game.attributes)
+        document.querySelector('#game-container').innerHTML += newGame.renderGame();
         })
     })
-}
-
-function renderGameForm(game) {
-    const gameMarkup = `
-    <div data-id=${game.id}>
-      <img src=${game.attributes.image_url} height="200" width="250">
-      <h3>${game.attributes.title}</h3>
-      <p>${game.attributes.description}</p>
-      <p>${game.attributes.genre.name}</p>
-      <button data-id=${game.id}>edit</button>
-    </div>
-    <br><br>`;
-
-    document.querySelector('#game-container').innerHTML += gameMarkup
 }
 
 function createFormHandler(e) {
@@ -52,8 +39,8 @@ function postFetch(title, description, image_url, genre_id) {
     })
     .then(response => response.json())
     .then(game => {
-        const gameData = game.data.attributes
-        // render JSON response
-        renderGameForm(gameData)
+        console.log(game);
+        const newGame = new Game(game.data.id, game.data.attributes)
+        document.querySelector('#game-container').innerHTML += newGame.renderGame();
     })
 }
