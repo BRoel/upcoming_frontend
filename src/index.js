@@ -23,13 +23,14 @@ function createFormHandler(e) {
     e.preventDefault()
     const titleInput = document.querySelector('#input-title').value
     const descriptionInput = document.querySelector('#input-description').value
+    const releaseDateInput = document.querySelector('#input-date').value
     const imageInput = document.querySelector('#input-url').value
     const genreId = parseInt(document.querySelector('#genres').value)
-    postFetch(titleInput, descriptionInput, imageInput, genreId)
+    postFetch(titleInput, descriptionInput, releaseDateInput, imageInput, genreId)
 }
 
-function postFetch(title, description, image_url, genre_id) {
-    const bodyData = {title, description, image_url, genre_id}
+function postFetch(title, description, release_date, image_url, genre_id) {
+    const bodyData = {title, description, release_date, image_url, genre_id}
 
     fetch(endPoint, {
     //post request
