@@ -12,13 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {// fetch and load
 })
 
 function getGames() {
-    fetch(baseURL)
+    document.querySelector('#game-container').innerHTML = "";
+    return fetch(baseURL)
     .then(response => response.json())
     .then(games => {
         games.data.forEach(game => {
         const newGame = new Game(game.id, game.attributes)
         document.querySelector('#game-container').innerHTML += newGame.renderGame();
         })
+    })
+    .then(() => {
+        deletedGameListener()
     })
 }
 
@@ -45,22 +49,28 @@ function postFetch(title, description, release_date, image_url, genre_id) {
     .then(game => {
         console.log(game);
         const newGame = new Game(game.data.id, game.data.attributes)
+       
         document.querySelector('#game-container').innerHTML += newGame.renderGame();
+        deletedGameListener()
     })
 }
 
-const deleteGame = (e) => {
+function deleteGame(e) {
     e.preventDefault()
-
-    const configObj = {
+    fetch(baseURL+'/'+e.currentTarget.dataset.id, {
         method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }
-    }
-    fetch(`${baseURL}/${e.target.dataset.Id}`, configObj)
+    })
+    .then(() => {
+        alert('game has been deleted');
+        getGames();
+    })
+    .catch((error) => alert(error))
+    
+}
 
-    .then(resp => resp.json())
-    .then(() => e.target.parentNode.remove());
+function deletedGameListener() {
+    const deleteButtons = document.getElementsByClassName("delete");
+    for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener('click', deleteGame, false);
+    }
 }
