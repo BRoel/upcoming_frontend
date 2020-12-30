@@ -1,15 +1,18 @@
-const endPoint = 'http://localhost:3000/api/v1/games';
+const baseURL = 'http://localhost:3000/api/v1/games'
+const formContainer = document.getElementById('form-container')
 
 document.addEventListener('DOMContentLoaded', () => {// fetch and load
     getGames()
 
     const createGameForm = document.querySelector("#create-games-form")
+    const deleteGameForm = document.querySelector("#game-container")
 
     createGameForm.addEventListener("submit", (e) => createFormHandler(e))
+    deleteGameForm.addEventListener("delete", (e) => deleteGame(e))
 })
 
 function getGames() {
-    fetch(endPoint)
+    fetch(baseURL)
     .then(response => response.json())
     .then(games => {
         games.data.forEach(game => {
@@ -32,7 +35,7 @@ function createFormHandler(e) {
 function postFetch(title, description, release_date, image_url, genre_id) {
     const bodyData = {title, description, release_date, image_url, genre_id}
 
-    fetch(endPoint, {
+    fetch(baseURL, {
     //post request
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -44,4 +47,20 @@ function postFetch(title, description, release_date, image_url, genre_id) {
         const newGame = new Game(game.data.id, game.data.attributes)
         document.querySelector('#game-container').innerHTML += newGame.renderGame();
     })
+}
+
+const deleteGame = (e) => {
+    e.preventDefault()
+
+    const configObj = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    }
+    fetch(`${baseURL}/${e.target.dataset.Id}`, configObj)
+
+    .then(resp => resp.json())
+    .then(() => e.target.parentNode.remove());
 }
