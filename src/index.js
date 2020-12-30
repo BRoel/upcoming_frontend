@@ -1,5 +1,4 @@
 const baseURL = 'http://localhost:3000/api/v1/games'
-const formContainer = document.getElementById('form-container')
 
 document.addEventListener('DOMContentLoaded', () => {// fetch and load
     getGames()
@@ -17,8 +16,8 @@ function getGames() {
     .then(response => response.json())
     .then(games => {
         games.data.forEach(game => {
-        const newGame = new Game(game.id, game.attributes)
-        document.querySelector('#game-container').innerHTML += newGame.renderGame();
+            const newGame = new Game(game.id, game.attributes)
+            document.querySelector('#game-container').innerHTML += newGame.renderGame();
         })
     })
     .then(() => {
@@ -40,10 +39,9 @@ function postFetch(title, description, release_date, image_url, genre_id) {
     const bodyData = {title, description, release_date, image_url, genre_id}
 
     fetch(baseURL, {
-    //post request
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(bodyData)
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(bodyData)
     })
     .then(response => response.json())
     .then(game => {
