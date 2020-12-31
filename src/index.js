@@ -4,15 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {// fetch and load
     getGames()
 
     const createGameForm = document.querySelector("#create-games-form")
-    const deleteGameForm = document.querySelector("#game-container")
 
     createGameForm.addEventListener("submit", (e) => createFormHandler(e))
-    deleteGameForm.addEventListener("delete", (e) => deleteGame(e))
 })
 
 function getGames() {
     document.querySelector('#game-container').innerHTML = "";
-    return fetch(baseURL)
+    fetch(baseURL)
     .then(response => response.json())
     .then(games => {
         games.data.forEach(game => {
@@ -55,7 +53,7 @@ function postFetch(title, description, release_date, image_url, genre_id) {
 
 function deleteGame(e) {
     e.preventDefault()
-    fetch(baseURL+'/'+e.currentTarget.dataset.id, {
+    fetch(baseURL+'/'+e.currentTarget.dataset.id, { // fetching the id route for my selected delete button
         method: "DELETE",
     })
     .then(() => {
@@ -69,6 +67,6 @@ function deleteGame(e) {
 function deletedGameListener() {
     const deleteButtons = document.getElementsByClassName("delete");
     for (let i = 0; i < deleteButtons.length; i++) {
-    deleteButtons[i].addEventListener('click', deleteGame, false);
+    deleteButtons[i].addEventListener('click', deleteGame, false); // assigning event listeners to all delete buttons in my class and looping through them
     }
 }
