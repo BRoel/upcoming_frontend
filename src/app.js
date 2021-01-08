@@ -40,7 +40,7 @@ class App {
             console.log(game);
             const newGame = new Game(game.data.id, game.data.attributes)
             document.querySelector('#game-container').innerHTML += newGame.renderGame();
-            this.getGames
+            this.getGames()
             this.reset()
         })
     }
@@ -56,7 +56,7 @@ class App {
     }
 
 
-    deleteGame(e) {
+    deleteGame = (e) => {
         e.preventDefault()
         fetch(`${this.baseURL+'/'+e.currentTarget.dataset.id}`, { // fetching the id route for my selected delete button
             method: "DELETE",
