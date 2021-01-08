@@ -1,6 +1,6 @@
 class Game {
     
-    constructor(id, gameAttr) {
+    constructor(id, gameAttr) { //creating and initializing
         this.id = id
         this.title = gameAttr.title
         this.description = gameAttr.description
