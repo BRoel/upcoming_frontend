@@ -3,15 +3,17 @@
 Upcoming is an application used to add and remove your desired upcoming games to track.  Uses a Rails API and JS frontend.  To get this application running please follow this readme, along with the readme in the link below.
 https://github.com/BRoel/upcoming_backend
 
-# Fork and Clone this Repository
+# Installation
+
+Fork and Clone this Repository
 ```
 $ git clone https://github.com/BRoel/upcoming_frontend.git
 ```
-# Navigate to upcoming_frontend
+Navigate to upcoming_frontend
 ```
 $ cd upcoming_frontend
 ```
-
+Boot-up your local environment
 ```
 Enter "open index.html" into your terminal
 ```
@@ -24,7 +26,7 @@ Enter "open index.html" into your terminal
 2.) Enter game title, description, date, image and genre type and submit to save your game.
 ```
 ```
-3.) 
+3.) Games can be added and deleted.
 ```
 
 # MIT License
