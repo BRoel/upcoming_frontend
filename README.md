@@ -4,7 +4,7 @@ Upcoming is an application used to add and remove your desired upcoming games to
 https://github.com/BRoel/upcoming_backend
 
 ##### Watch my demo on YouTube
-<a href= 'https://www.youtube.com/watch?v=BrFE2qKmIj4' rel="nofollow"><img src= "https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" /></a>
+<a href= 'https://www.youtube.com/watch?v=BrFE2qKmIj4' rel="nofollow"><img src= "https://raw.githubusercontent.com/BRoel/feed-it_frontend/main/public/yt_logo_rgb_dark.png" /></a>
 
 # Future Implementations
 
